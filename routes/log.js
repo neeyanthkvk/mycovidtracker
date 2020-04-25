@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
     datastore.runQuery(query).then(([logs]) => {
         console.log('Logs:');
         logs.forEach(task => console.log(task.body));
-        res.render('log', {'logs': logs});
+        res.render('tracking', {'logs': logs});
     }).catch((error) => {
         console.log(error);
         res.send("Some Error Occured");
