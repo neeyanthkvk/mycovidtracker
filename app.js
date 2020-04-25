@@ -7,6 +7,7 @@ const http = require('http');
 const {Datastore} = require('@google-cloud/datastore');
 
 var indexRouter = require('./routes/index');
+var aboutRouter = require('./routes/about');
 var usersRouter = require('./routes/users');
 var classifierRouter = require('./routes/classifier');
 var logRouter = require('./routes/log');
@@ -38,6 +39,7 @@ app.locals.datastore = new Datastore({
 });
 
 app.use('/', indexRouter);
+app.use('/about', aboutRouter);
 app.use('/users', usersRouter);
 app.use('/classifier', classifierRouter);
 app.use('/log', logRouter);
