@@ -3,6 +3,7 @@
     <head>
         <!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
         <meta charset="utf-8">
+        <link rel="shortcut icon" href="">
         <title>Classifier</title>
     </head>
 	<body>
@@ -10,35 +11,53 @@
 
 		<div>
 			Upload audio file:
-            <input type="file" id="file-input"/>
-            <button id="upload-button">Upload</button><br>
-            <button id>
-		</div>
+            <input type="file" accept="audio/*" id="file-input"/>
+            <button id="upload-file-button">Upload File</button><br>
+        </div>
+
+        <br>
+
+        <div>
+            Record: <br>
+            <p id="record-status-text">No recording yet</p>
+            <button id="start-record-button">Start</button><br>
+            <button id="stop-record-button">Stop</button><br>
+            <button id="upload-record-button">Upload Recording</button><br>
+            <audio id="recorded-audio"></audio>
+        </div>
+
+        <p id="user-health-text"></p>
 
 		<script type="text/javascript">
-            var uploadButton = document.getElementById("upload-button");
+            var fileInput = document.getElementById("file-input");
+            var uploadFileButton = document.getElementById("upload-file-button");
+            uploadFileButton.onclick = function () {
+                handleFileUpload(fileInput.files[0], "file");
+            }
 
-            const handleImageUpload = event => {
-                const files = event.target.files
-                const formData = new FormData()
-                formData.append('myFile', files[0])
+            function handleFileUpload (file, uploadType) {
+                const formData = new FormData();
+                formData.append('myFile', file);
 
-                fetch('upload_file_worker', {
+                fetch('/classifier/upload_file_worker', {
                     method: 'POST',
-                    body: formData
+                    body: formData,
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data.path)
+                    console.log("success");
+                    // response if successful
+                    // console.log(data);
                 })
                 .catch(error => {
                     console.error(error)
                 })
             }
 
-            document.querySelector('#file-input').addEventListener('change', event => {
-                handleImageUpload(event)
-            })
+            // all recording code
 		</script>
+
+        <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+        <script src="scripts/record.js"></script>
 	</body>
 </html>

@@ -30,6 +30,7 @@ app.use(session({
 }))
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/scripts', express.static(path.join(__dirname, 'views/scripts')));
 
 app.locals.datastore = new Datastore({
   projectId: 'mycovidtracker',
