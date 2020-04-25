@@ -17,36 +17,46 @@ var constraints = {
 var curBlob;
 var rec;
 var recordedAudio = document.getElementById("recorded-audio");
-navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
-    console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
-    /* assign to gumStream for later use */
-    gumStream = stream;
-    /* use the stream */
-    var audioContext = new AudioContext;
-    input = audioContext.createMediaStreamSource(stream);
-    /* Create the Recorder object and configure to record mono sound (1 channel) Recording 2 channels will double the file size */
-    rec = new Recorder(input, {
-        numChannels: 1
-    })
-});
+
 
 var isRecording = false;
 var recordStatusText = document.getElementById("record-status-text");
 var startRecordButton = document.getElementById("start-record-button");
 var stopRecordButton = document.getElementById("stop-record-button");
 var uploadRecordButton = document.getElementById("upload-record-button");
+
+startRecordButton.disabled = false;
+stopRecordButton.disabled = true;
+
 startRecordButton.onclick = function (event) {
     if (!isRecording) {
         recordStatusText.innerHTML = "started recording";
+        startRecordButton.disabled = true;
+        stopRecordButton.disabled = false;
         isRecording = true;
-        rec.record();
+
+        navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
+            /* assign to gumStream for later use */
+            gumStream = stream;
+            /* use the stream */
+            var audioContext = new AudioContext;
+            input = audioContext.createMediaStreamSource(stream);
+            /* Create the Recorder object and configure to record mono sound (1 channel) Recording 2 channels will double the file size */
+            rec = new Recorder(input, {
+                numChannels: 1
+            })
+            rec.record();
+        });
     }
 }
 
 stopRecordButton.onclick = function (event) {
     if (isRecording) {
         recordStatusText.innerHTML = "stopped recording";
+        startRecordButton.disabled = false;
+        stopRecordButton.disabled = true;
         isRecording = false;
+
         rec.stop();
         gumStream.getAudioTracks()[0].stop();
         rec.exportWAV(function (blob) {
@@ -54,7 +64,6 @@ stopRecordButton.onclick = function (event) {
             recordedAudio.src = URL.createObjectURL(curBlob);
             recordedAudio.controls = true;
             recordedAudio.autoplay = true;
-            console.log(curBlob);
         });
     }
 }
