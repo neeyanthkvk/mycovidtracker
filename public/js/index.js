@@ -24,7 +24,7 @@ function loginForm() {
 }
 
 function loginResponse(response) {
-    alert("Logged in!");
+    alert(response);
 }
 
 function registerForm() {
@@ -46,5 +46,5 @@ function registerForm() {
 }
 
 function registerResponse(response) {
-    alert("Registered!");
+    alert(response);
 }
