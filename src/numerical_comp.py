@@ -10,8 +10,8 @@ with warnings.catch_warnings():
 filepath1 = sys.argv[1]
 filepath2 = sys.argv[2]
 
-#print("filepath1: " + filepath1)
-#print("filepath2: " + filepath2)
+# print("filepath1: " + filepath1)
+# print("filepath2: " + filepath2)
 
 wf_base, sr_base = librosa.load(filepath1)
 wf_test, sr_test = librosa.load(filepath2)

@@ -11,4 +11,4 @@ os.system("sox -m -v 1 " + filepath1 +" -v -1 " + filepath2 + " sound-difference
 
 os.system("sox sound-difference.wav -n spectrogram -o sound-difference.png")
 
-
+print("comp_voice.py finished")

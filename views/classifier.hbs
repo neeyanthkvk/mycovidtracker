@@ -27,8 +27,11 @@
         </div>
 
         <p id="user-health-text"></p>
+        <canvas id="image-canvas">
 
 		<script type="text/javascript">
+            var userHealthText = document.getElementById("user-health-text");
+
             var fileInput = document.getElementById("file-input");
             var uploadFileButton = document.getElementById("upload-file-button");
             uploadFileButton.onclick = function () {
@@ -46,8 +49,7 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log("success");
-                    // response if successful
-                    // console.log(data);
+                    userHealthText.innerHTML = data.num;
                 })
                 .catch(error => {
                     console.error(error)
