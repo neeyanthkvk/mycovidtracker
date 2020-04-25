@@ -3,18 +3,24 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    const datastore = req.app.locals.datastore;
-    const query = datastore
-    .createQuery('Logs')
-    .filter('username', '=', req.session.username);
-    datastore.runQuery(query).then(([logs]) => {
-        console.log('Logs:');
-        logs.forEach(task => console.log(task.body));
-        res.render('log', {'logs': logs});
-    }).catch((error) => {
-        console.log(error);
-        res.send("Some Error Occured");
-    })
+    console.log(req.query)
+    if('data' in req.query) {
+        const datastore = req.app.locals.datastore;
+        const query = datastore
+        .createQuery('Logs')
+        .filter('username', '=', req.session.username);
+        datastore.runQuery(query).then(([logs]) => {
+            res.send({
+                'logs': logs
+            });
+        }).catch((error) => {
+            console.log(error);
+            res.send("Some Error Occured");
+        })
+    }
+    else {
+        res.render('tracking')
+    }
 });
 
 router.post('/', function(req, res, next) {

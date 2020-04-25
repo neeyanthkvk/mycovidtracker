@@ -1,63 +1,68 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
-        <meta charset="utf-8">
-        <link rel="shortcut icon" href="">
-        <title>Classifier</title>
-    </head>
-	<body>
-		<h1>Classifier</h1>
 
-		<div>
-			Upload audio file:
-            <input type="file" accept="audio/*" id="file-input"/>
-            <button id="upload-file-button">Upload File</button><br>
-        </div>
+<head>
+	<!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
+	<meta charset="utf-8">
+	<link rel="shortcut icon" href="">
+	<title>Classifier</title>
+</head>
 
-        <br>
+<body>
+	<h1>Classifier</h1>
 
-        <div>
-            Record: <br>
-            <p id="record-status-text">No recording yet</p>
-            <button id="start-record-button">Start</button><br>
-            <button id="stop-record-button">Stop</button><br>
-            <button id="upload-record-button">Upload Recording</button><br>
-            <audio id="recorded-audio"></audio>
-        </div>
+	<div>
+		Upload audio file:
+		<input type="file" accept="audio/*" id="file-input" />
+		<button id="upload-file-button">Upload File</button><br>
+	</div>
 
-        <p id="user-health-text"></p>
+	<br>
+
+	<div>
+		Record: <br>
+		<p id="record-status-text">No recording yet</p>
+		<button id="start-record-button">Start</button><br>
+		<button id="stop-record-button">Stop</button><br>
+		<button id="upload-record-button">Upload Recording</button><br>
+		<audio id="recorded-audio"></audio>
+	</div>
+
+	<p id="user-health-text"></p>
+	<canvas id="image-canvas">
 
 		<script type="text/javascript">
-            var fileInput = document.getElementById("file-input");
-            var uploadFileButton = document.getElementById("upload-file-button");
-            uploadFileButton.onclick = function () {
-                handleFileUpload(fileInput.files[0], "file");
-            }
+			var userHealthText = document.getElementById("user-health-text");
 
-            function handleFileUpload (file, uploadType) {
-                const formData = new FormData();
-                formData.append('myFile', file);
+			var fileInput = document.getElementById("file-input");
+			var uploadFileButton = document.getElementById("upload-file-button");
+			uploadFileButton.onclick = function() {
+				handleFileUpload(fileInput.files[0], "file");
+			}
 
-                fetch('/classifier/upload_file_worker', {
-                    method: 'POST',
-                    body: formData,
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log("success");
-                    // response if successful
-                    // console.log(data);
-                })
-                .catch(error => {
-                    console.error(error)
-                })
-            }
+			function handleFileUpload(file, uploadType) {
+				const formData = new FormData();
+				formData.append('myFile', file);
 
-            // all recording code
+				fetch('/classifier/upload_file_worker', {
+						method: 'POST',
+						body: formData,
+					})
+					.then(response => response.json())
+					.then(data => {
+						console.log("success");
+						userHealthText.innerHTML = data.num;
+					})
+					.catch(error => {
+						console.error(error)
+					})
+			}
+
+			// all recording code
 		</script>
 
-        <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
-        <script src="scripts/record.js"></script>
-	</body>
+		<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+		<script src="js/record.js"></script>
+</body>
+
 </html>
