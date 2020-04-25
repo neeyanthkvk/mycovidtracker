@@ -4,21 +4,12 @@ var router = express.Router();
 /* GET users listing. */
 router.get('/', function(req, res, next) {
     const datastore = req.app.locals.datastore;
-    const key = datastore.key(['User', req.query.username]);
-    datastore.get(key).then((data) => {
-        if(data.length == 0) {
-            res.send("No User Found!");
-        }
-        else {
-            var user = data[0];
-            if(user.password == req.query.password) {
-                req.session.username = req.query.username
-                res.send("Success!");
-            }
-            else {
-                res.send("Wrong Password");
-            }
-        }
+    const query = datastore
+    .createQuery('Logs')
+    .filter('username', '=', req.session.username);
+    datastore.runQuery(query).then(([tasks]) => {
+        console.log('Tasks:');
+        tasks.forEach(task => console.log(task));
     }).catch((error) => {
         console.log(error);
         res.send("Some Error Occured");

@@ -25,6 +25,7 @@ function loginForm() {
 
 function loginResponse(response) {
     alert(response);
+    window.location.href = '/';
 }
 
 function registerForm() {
@@ -47,4 +48,19 @@ function registerForm() {
 
 function registerResponse(response) {
     alert(response);
+    window.location.href = '/';
+}
+
+function logout() {
+    var ajax_params = {
+        'url'     : "/users",
+        'type'    : "DELETE",
+        'success' : logoutResponse
+    };
+    $.ajax(ajax_params);
+}
+
+function logoutResponse(response) {
+    alert(response);
+    window.location.href = '/';
 }
