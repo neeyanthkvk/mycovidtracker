@@ -4,42 +4,54 @@ var router = express.Router();
 /* GET users listing. */
 router.get('/', function(req, res, next) {
     const datastore = req.app.locals.datastore;
-    console.log(req.query);
     const key = datastore.key(['User', req.query.username]);
     datastore.get(key).then((data) => {
-        console.log(data);
         if(data.length == 0) {
             res.send("No User Found!");
         }
         else {
             var user = data[0];
-            console.log(user);
-            req.session.username = user.name;
-            res.send("Success!");
+            if(user.password == req.query.password) {
+                req.session.username = req.query.username
+                res.send("Success!");
+            }
+            else {
+                res.send("Wrong Password");
+            }
         }
     }).catch((error) => {
         console.log(error);
+        res.send("Some Error Occured");
     })
 });
 
 router.post('/', function(req, res, next) {
     const datastore = req.app.locals.datastore;
-    console.log(req.query);
-    const key = datastore.key(['User', req.query.username]);
+    const key = datastore.key(['User', req.body.username]);
     const entity = {
         key: key,
         data: {
-            "password": req.query.password,
-            "First Name": req.query.first,
-            "Last Name": req.query.last
+            "password": req.body.password,
+            "First Name": req.body.first,
+            "Last Name": req.body.last,
+            "admin": false
         }
     };
     datastore.save(entity).then((data) => {
-        console.log(data);
         res.send("Success!");
     }).catch((error) => {
         console.log(error);
     })
 });
+
+router.delete("/", function(req, res, next) {
+    try {
+        req.session = null;
+        res.send("You have Logged Out");
+    }
+    catch(err) {
+        console.log(err)
+    }
+})
 
 module.exports = router;

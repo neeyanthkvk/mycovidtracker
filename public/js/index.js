@@ -24,7 +24,8 @@ function loginForm() {
 }
 
 function loginResponse(response) {
-    alert("Logged in!");
+    alert(response);
+    window.location.href = '/';
 }
 
 function registerForm() {
@@ -46,5 +47,20 @@ function registerForm() {
 }
 
 function registerResponse(response) {
-    alert("Registered!");
+    alert(response);
+    window.location.href = '/';
+}
+
+function logout() {
+    var ajax_params = {
+        'url'     : "/users",
+        'type'    : "DELETE",
+        'success' : logoutResponse
+    };
+    $.ajax(ajax_params);
+}
+
+function logoutResponse(response) {
+    alert(response);
+    window.location.href = '/';
 }
