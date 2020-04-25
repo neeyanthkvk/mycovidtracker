@@ -4,6 +4,7 @@ const path = require('path');
 const session = require('cookie-session');
 const logger = require('morgan');
 const http = require('http');
+const {Datastore} = require('@google-cloud/datastore');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -29,6 +30,11 @@ app.use(session({
 }))
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/scripts', express.static(path.join(__dirname, 'views/scripts')));
+
+app.locals.datastore = new Datastore({
+  projectId: 'mycovidtracker',
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

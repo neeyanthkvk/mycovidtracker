@@ -18,11 +18,20 @@ router.get('/', function(req, res, next) {
 const fileupload = require("express-fileupload");
 router.use(fileupload());
 
+
 router.post('/upload_file_worker', (req, res) => {
 	console.log("upload_file_worker anon()")
+
 	var myFile = req.files.myFile;
-	const fileName = myFile.name
+	var needsConversion = myFile.name == "blob";
+	var fileName = "_" + Math.round(Math.random() * 10000) + "_" + myFile.name;
+	console.log("hi");
+	if (needsConversion) {
+		fileName += ".wav";
+	}
 	const path = './data/' + fileName
+	console.log(path);
+	console.log("hi");
 
 	myFile.mv(path, (error) => {
 		if (error) {
@@ -37,8 +46,8 @@ router.post('/upload_file_worker', (req, res) => {
 		res.writeHead(200, {
 			'Content-Type': 'application/json'
 		})
-		res.end(JSON.stringify({ status: 'success', path: '/img/houses/' + fileName }))
-	})
+		res.end(JSON.stringify({ status: 'success', path: path}))
+	});
 })
 
 module.exports = router;
