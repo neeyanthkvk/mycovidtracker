@@ -10,5 +10,6 @@ os.system("sox " + filepath2 + " -n spectrogram -o sound-new.png")
 os.system("sox -m -v 1 " + filepath1 +" -v -1 " + filepath2 + " sound-difference.wav")
 
 os.system("sox sound-difference.wav -n spectrogram -o sound-difference.png")
+print(sound-difference.png)
 
 
