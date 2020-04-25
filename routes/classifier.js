@@ -86,6 +86,9 @@ router.post('/upload_file_worker', (req, res) => {
 				console.error(err)
 			} else {
 				res.end(JSON.stringify({ status: 'success', num: results[0]}))
+
+				// clean up and delete files
+				exec("rm " + outputBasePath + " " + outputNewPath + " " + outputDiffPath + " " + outputDiffImagePath);
 			}
 		});
 	});

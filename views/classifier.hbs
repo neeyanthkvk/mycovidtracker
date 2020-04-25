@@ -1,35 +1,34 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
+		<meta charset="utf-8">
+		<link rel="shortcut icon" href="">
+		<title>Classifier</title>
+	</head>
 
-<head>
-	<!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
-	<meta charset="utf-8">
-	<link rel="shortcut icon" href="">
-	<title>Classifier</title>
-</head>
+	<body>
+		<h1>Classifier</h1>
 
-<body>
-	<h1>Classifier</h1>
+		<div>
+			Upload audio file:
+			<input type="file" accept="audio/*" id="file-input" />
+			<button id="upload-file-button">Upload File</button><br>
+		</div>
 
-	<div>
-		Upload audio file:
-		<input type="file" accept="audio/*" id="file-input" />
-		<button id="upload-file-button">Upload File</button><br>
-	</div>
+		<br>
 
-	<br>
+		<div>
+			Record: <br>
+			<p id="record-status-text">No recording yet</p>
+			<button id="start-record-button">Start</button><br>
+			<button id="stop-record-button">Stop</button><br>
+			<button id="upload-record-button">Upload Recording</button><br>
+			<audio id="recorded-audio"></audio>
+		</div>
 
-	<div>
-		Record: <br>
-		<p id="record-status-text">No recording yet</p>
-		<button id="start-record-button">Start</button><br>
-		<button id="stop-record-button">Stop</button><br>
-		<button id="upload-record-button">Upload Recording</button><br>
-		<audio id="recorded-audio"></audio>
-	</div>
-
-	<p id="user-health-text"></p>
-	<canvas id="image-canvas">
+		<p id="user-health-text"></p>
+		<canvas id="image-canvas">
 
 		<script type="text/javascript">
 			var userHealthText = document.getElementById("user-health-text");
@@ -63,6 +62,6 @@
 
 		<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
 		<script src="js/record.js"></script>
-</body>
+	</body>
 
 </html>
