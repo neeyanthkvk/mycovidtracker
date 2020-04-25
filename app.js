@@ -45,5 +45,5 @@ app.use(function(err, req, res, next) {
 });
 
 server.listen(8080, function() {
-    console.log('Starting server on port ' + app.locals.config.siteConfig.port);
+    console.log('Starting server on port 8080');
 });
