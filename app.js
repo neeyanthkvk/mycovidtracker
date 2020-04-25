@@ -29,6 +29,7 @@ app.use(session({
 }))
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/scripts', express.static(path.join(__dirname, 'views/scripts')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
