@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
+        <meta charset="utf-8">
+        <title>Classifier</title>
+    </head>
+	<body>
+		<h1>Classifier</h1>
+
+		<div>
+			Upload audio file:
+            <form action="upload_data_worker" method="post">
+                <input id="file-input" type="file" />
+                <button type="submit">Analyze</button>
+            </form>
+            <p id="file-name-text"></p>
+		</div>
+
+		<script>
+			var fileInput = document.getElementById("file-input");
+
+            // fileInput.addEventListener("change", uploadAudioData, false);
+            //
+            // function uploadAudioData (event) {
+            //     if (event.target.files.length > 0) {
+            //         var reader = new FileReader();
+            //         reader.onload = function (event) {
+            //             console.log(event.target.result);
+            //         }
+            //         console.log(event.target.files[0]);
+            //         document.getElementById("file-name-text").innerHTML = event.target.files[0].name;
+            //         reader.readAsText(event.target.files[0]);
+            //     }
+            // }
+		</script>
+	</body>
+</html>
