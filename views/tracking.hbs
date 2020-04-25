@@ -25,6 +25,9 @@
 					<li class="nav-item"><a class="nav-link" href="./classifier"><span class="fa fa-address-card fa-lg"></span>Classifier</a></li>
 				</ul>
 				<span class="navbar-text">
+					<a id="log-modal-button">
+						<span class="fa fa-archive"></span> Post Log
+					</a>
 					<a id="logoutButton" onclick="logout()">
 						<span class="fa fa-sign-in"></span> Log Out
 					</a>
@@ -111,14 +114,22 @@
 					<h1>MyCovidTracker</h1>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-12">
+					<div style="width:100%;">
+						<canvas id="canvas"></canvas>
+					</div>
+				</div>
+			</div>
 		</div>
 	</header>
-	<button id="log-modal-button">Post Log</button>
 
 
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.js"></script>
+	<script src="https://www.chartjs.org/dist/2.9.3/Chart.min.js"></script>
+	<script src="https://www.chartjs.org/samples/latest/utils.js"></script>
 	<script src="js/tracking.js"></script>
 	<script src="js/index.js"></script>
 
