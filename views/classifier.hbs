@@ -75,7 +75,7 @@
 		<br>
 
 		<div>
-            <h2 class="site-section-heading text-uppercase  font-secondary" id="has-base-audio-text"></h2>
+            <h2 class="text-uppercase  font-secondary" id="has-base-audio-text" style = "width:50%"></h2>
 			<button id="reset-base-audio-button" class = "btn btn-primary text-white px-4 text-center" data-aos="fade-up" data-aos-delay="100">Reset Base Audio</button>
 			<br><br>
 		</div>
@@ -118,13 +118,16 @@
 			socket.on("hasBaseAudio", function(data) {
 				hasBaseAudio = data.status;
 				if(hasBaseAudio) {
-					hasBaseAudioText.innerHTML = "You've Already Recorded a Baseline Audio Clip"
+					hasBaseAudioText.innerHTML = "Your Baseline Audio Clip Has Been Recorded"
+					resetBaseAudioButton.disabled = false;
+					resetBaseAudioButton.style.display = "block";
 				}
 				else{
 					hasBaseAudioText.innerHTML = "Record Your Baseline Audio Clip";
+					resetBaseAudioButton.disabled = true;
+					resetBaseAudioButton.style.display = "none";
 				}
 
-				resetBaseAudioButton.disabled = !hasBaseAudio;
 			});
 
 			var resetBaseAudioButton = document.getElementById("reset-base-audio-button");
