@@ -93,10 +93,12 @@
 
 		<p id="upload-status-text"></p>
 
-		<canvas id="image-canvas" width="600" height="400" style="border: 1px solid #000000;" oncontextmenu="return false"></canvas>
+		<img id="diff-image" width="40%">
 
 		<script src="/socket.io/socket.io.js"></script>
 		<script type="text/javascript">
+			function b64(e){var t="";var n=new Uint8Array(e);var r=n.byteLength;for(var i=0;i<r;i++){t+=String.fromCharCode(n[i])}return window.btoa(t)};
+
 			var username = "{{{username}}}";
 
 			var socket = io();
@@ -115,15 +117,11 @@
 				socket.emit("resetBaseAudio", {id: username});
 			};
 
-
-			var canvas = document.getElementById("image-canvas");
-			var ctx = canvas.getContext("2d")
+			var diffImage = document.getElementById("diff-image");
 			socket.on("diffImage", function(data) {
 				console.log("Received diffImage")
 				console.log(data);
-				var img = new Image();
-				img.src = 'data:image/jpeg;base64,' + data.buffer;
-				ctx.drawImage(img, 0, 0);
+				diffImage.src = data;
 			});
 
 			var uploadStatusText = document.getElementById("upload-status-text")

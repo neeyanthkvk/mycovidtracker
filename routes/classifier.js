@@ -138,8 +138,9 @@ module.exports = function (io) {
 					res.end(JSON.stringify({ status: 'success', audioType: audioType, num: results[0]}))
 
 
-					fs.readFile(outputDiffImagePath, function(err, buf){
-						socket.emit('diffImage', { image: true, buffer: buf.toString('base64') });
+					fs.readFile(outputDiffImagePath, function(err, data){
+						var obj = "data:image/png;base64,"+ data.toString("base64");
+						socket.emit('diffImage', obj);
 						console.log('Image sent');
 
 						// clean up and delete files
