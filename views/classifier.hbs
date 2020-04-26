@@ -95,6 +95,7 @@
 
 		<img id="diff-image" width="40%">
 
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
 		<script type="text/javascript">
 			function b64(e){var t="";var n=new Uint8Array(e);var r=n.byteLength;for(var i=0;i<r;i++){t+=String.fromCharCode(n[i])}return window.btoa(t)};
@@ -120,7 +121,6 @@
 			var diffImage = document.getElementById("diff-image");
 			socket.on("diffImage", function(data) {
 				console.log("Received diffImage")
-				console.log(data);
 				diffImage.src = data;
 			});
 
@@ -169,6 +169,13 @@
 		<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
 		<script src="js/record.js"></script>
 		<script src="js/index.js"></script>
+		<footer>
+			<p>
+				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+			</p>
+		</footer>
 	</body>
 
 </html>
