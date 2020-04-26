@@ -62,35 +62,40 @@
 				</div>
 			</div>
 		</div>
-
+		<div class="container">
+			<div class="row row-content align-items-center">
+				<div class="col-12 col-sm-6 m-4">
+					<h1>Vocal Inflection Classifier</h1>
+				</div>
+			</div>
+		</div>
 		<br>
-		<h1>Classifier</h1>
-		<h2>Welcome '{{username}}'</h2>
 
 		<div>
-			<p id="has-base-audio-text"></p>
-			<button id="reset-base-audio-button">Reset Base Audio</button>
+            <h2 class="site-section-heading text-uppercase  font-secondary" id="has-base-audio-text"></h2>
+			<button id="reset-base-audio-button" class = "btn btn-primary text-white px-4 text-center" data-aos="fade-up" data-aos-delay="100">Reset Base Audio</button>
 			<br><br>
 		</div>
-
-		<div>
-			Upload audio file:
-			<input type="file" accept="audio/*" id="file-input" />
-			<button id="upload-file-button">Upload File</button><br>
-			<br>
+		<div class = 'row ' style = 'background-color: #CCCC99'>
+			<div class = 'm-3 p-3'>
+				<span class="caption d-block mb-2 font-secondary font-weight-bold">Pre-Recorded File</span>
+				<h2 class="font-secondary text-uppercase">Upload Audio File</h2>
+				<input type="file" accept="audio/*" id="file-input" />
+				<button id="upload-file-button" class = "btn btn-primary text-white px-4" data-aos="fade-up" data-aos-delay="100">Upload File</button><br>
+				<br>
+			</div>
+			<div class = 'm-4 p-4' style = "font-size: 30px">OR</div>
+			<div class = 'm-3 p-3'>
+				<span class="caption d-block mb-2 font-secondary font-weight-bold">Record On-Site</span>
+				<h2 class="font-secondary text-uppercase">Record Voice: </h2>
+				<button id="start-record-button" class = "btn btn-primary text-white px-4" data-aos="fade-up" data-aos-delay="100">Start</button>
+				<button id="stop-record-button" class = "btn btn-primary text-white px-4" data-aos="fade-up" data-aos-delay="100">Stop</button>
+				<button id="upload-record-button" class = "btn btn-primary text-white px-4" data-aos="fade-up" data-aos-delay="100" style: "float:right">Upload Recording</button>
+				<br>
+				<p id="record-status-text"></p>
+				<audio id="recorded-audio"></audio>
+			</div>
 		</div>
-
-		<div>
-			Record voice:
-			<button id="start-record-button">Start</button>
-			<button id="stop-record-button">Stop</button>
-			<br>
-			<button id="upload-record-button">Upload Recording</button>
-			<br>
-			<p id="record-status-text"></p>
-			<audio id="recorded-audio"></audio>
-		</div>
-
 		<p id="upload-status-text"></p>
 
 		<img id="diff-image" width="40%">
@@ -109,7 +114,13 @@
 			var hasBaseAudio = false;
 			socket.on("hasBaseAudio", function(data) {
 				hasBaseAudio = data.status;
-				hasBaseAudioText.innerHTML = "Has base audio: " + hasBaseAudio;
+				if(hasBaseAudio) {
+					hasBaseAudioText.innerHTML = "You've Already Recorded a Baseline Audio Clip"
+				}
+				else{
+					hasBaseAudioText.innerHTML = "Record Your Baseline Audio Clip";
+				}
+
 				resetBaseAudioButton.disabled = !hasBaseAudio;
 			});
 
@@ -169,6 +180,19 @@
 		<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
 		<script src="js/record.js"></script>
 		<script src="js/index.js"></script>
+	  <script src="js/jquery-3.3.1.min.js"></script>
+	  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+	  <script src="js/jquery-ui.js"></script>
+	  <script src="js/popper.min.js"></script>
+	  <script src="js/bootstrap.min.js"></script>
+	  <script src="js/owl.carousel.min.js"></script>
+	  <script src="js/jquery.stellar.min.js"></script>
+
+	  <script src="js/jquery.waypoints.min.js"></script>
+	  <script src="js/jquery.animateNumber.min.js"></script>
+	  <script src="js/aos.js"></script>
+
+	  <script src="js/main.js"></script>
 		<footer>
 			<p>
 				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
