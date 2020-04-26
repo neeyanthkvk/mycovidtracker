@@ -123,13 +123,11 @@ function dataResponse(logData) {
         }
     }
     logData.logs.forEach((log) => {
-        console.log("DEBUG: " + JSON.stringify(log))
         var dat = new Date(log.time)
-        data.data.labels.push(dat.getMonth() + "/" + dat.getDay());
+        data.data.labels.push(dat.getMonth()+1 + "/" + dat.getDate());
         data.data.datasets[0].data.push(parseInt(log.body.temperature));
         data.data.datasets[1].data.push(parseInt(log.body.heartRate));
     });
-    console.log(data)
     var ctx = document.getElementById('canvas').getContext('2d');
 	window.myLine = new Chart(ctx, data);
 }
