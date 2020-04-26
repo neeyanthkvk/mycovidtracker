@@ -18,7 +18,7 @@ var curBlob;
 var rec;
 var recordedAudio = document.getElementById("recorded-audio");
 
-
+var recordDuration = 0;
 var isRecording = false;
 var recordStatusText = document.getElementById("record-status-text");
 var startRecordButton = document.getElementById("start-record-button");
@@ -30,7 +30,7 @@ stopRecordButton.disabled = true;
 
 startRecordButton.onclick = function (event) {
     if (!isRecording) {
-        recordStatusText.innerHTML = "started recording";
+        recordDuration = 0;
         startRecordButton.disabled = true;
         stopRecordButton.disabled = false;
         isRecording = true;
@@ -52,7 +52,7 @@ startRecordButton.onclick = function (event) {
 
 stopRecordButton.onclick = function (event) {
     if (isRecording) {
-        recordStatusText.innerHTML = "stopped recording";
+        recordStatusText.innerHTML = "Recording duration " + Math.round(recordDuration * 10) / 10;
         startRecordButton.disabled = false;
         stopRecordButton.disabled = true;
         isRecording = false;
@@ -70,9 +70,17 @@ stopRecordButton.onclick = function (event) {
 
 uploadRecordButton.onclick = function (event) {
     if (curBlob == undefined) {
-        recordStatusText.innerHTML = "Tried to upload recording, but has not recorded"
+        recordStatusText.innerHTML = "Please record before uploading"
     } else {
         recordStatusText.innerHTML = "Uploaded recording"
         handleFileUpload(curBlob, "recording");
     }
 }
+
+var checkFreq = 0.1;
+setInterval(function() {
+    if (isRecording) {
+        recordDuration += checkFreq;
+        recordStatusText.innerHTML = "Recording " + Math.round(recordDuration * 10) / 10;
+    }
+}, 1000 * checkFreq);

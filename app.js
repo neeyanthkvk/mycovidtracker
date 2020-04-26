@@ -6,14 +6,17 @@ const logger = require('morgan');
 const http = require('http');
 const {Datastore} = require('@google-cloud/datastore');
 
+var app = express();
+var server = http.Server(app);
+
+const io = require("socket.io")(server);
+
 var indexRouter = require('./routes/index');
 var aboutRouter = require('./routes/about');
 var usersRouter = require('./routes/users');
-var classifierRouter = require('./routes/classifier');
+var classifierRouter = require('./routes/classifier')(io);
 var logRouter = require('./routes/log');
 
-var app = express();
-var server = http.Server(app);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

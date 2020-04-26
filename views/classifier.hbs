@@ -1,36 +1,132 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
 		<meta charset="utf-8">
-		<link rel="shortcut icon" href="">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/style.css">
+	    <link href="https://fonts.googleapis.com/css?family=Oswald:400,700|Work+Sans:300,400,700" rel="stylesheet">
+	    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+	    <link rel="stylesheet" href="css/bootstrap.min.css">
+	    <link rel="stylesheet" href="css/magnific-popup.css">
+	    <link rel="stylesheet" href="css/jquery-ui.css">
+	    <link rel="stylesheet" href="css/owl.carousel.min.css">
+	    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+	    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+	    <link rel="stylesheet" href="css/animate.css">
+
+	    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+
+	    <link rel="stylesheet" href="css/aos.css">
+
+	    <link rel="stylesheet" href="css/neostyle.css">
 		<title>Classifier</title>
 	</head>
 
 	<body>
+		<div class="navbar navbar-dark navbar-expand-sm fixed-top">
+			<div class="container">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="Navbar">
+					{{#if auth}}
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item active"><a class="nav-link" href="./"><span class="fa fa-home fa-lg"></span> Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="./about"><span class="fa fa-info fa-lg"></span> About</a></li>
+							<li class="nav-item"><a class="nav-link" href="./log"><span class="fa fa-address-card fa-lg"></span>My Logs</a></li>
+							<li class="nav-item"><a class="nav-link" href="./classifier"><span class="fa fa-address-card fa-lg"></span>Classifier</a></li>
+						</ul>
+						<span class="navbar-text">
+							<a id="logoutButton" onclick="logout()">
+								<span class="fa fa-sign-in"></span> Log Out
+							</a>
+						</span>
+					{{else}}
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item active"><a class="nav-link" href="./"><span class="fa fa-home fa-lg"></span> Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="./about"><span class="fa fa-info fa-lg"></span> About</a></li>
+						</ul>
+						<span class="navbar-text">
+							<a id="login-modal-button">
+								<span class="fa fa-sign-in"></span> Login
+							</a>
+							<a id="register-modal-button">
+								<span class="fa fa-sign-in"></span> Register
+							</a>
+						</span>
+					{{/if}}
+				</div>
+			</div>
+		</div>
+
+		<br>
 		<h1>Classifier</h1>
+		<h2>Welcome '{{username}}'</h2>
+
+		<div>
+			<p id="has-base-audio-text"></p>
+			<button id="reset-base-audio-button">Reset Base Audio</button>
+			<br><br>
+		</div>
 
 		<div>
 			Upload audio file:
 			<input type="file" accept="audio/*" id="file-input" />
 			<button id="upload-file-button">Upload File</button><br>
+			<br>
 		</div>
 
-		<br>
-
 		<div>
-			Record: <br>
-			<p id="record-status-text">No recording yet</p>
-			<button id="start-record-button">Start</button><br>
-			<button id="stop-record-button">Stop</button><br>
-			<button id="upload-record-button">Upload Recording</button><br>
+			Record voice:
+			<button id="start-record-button">Start</button>
+			<button id="stop-record-button">Stop</button>
+			<br>
+			<button id="upload-record-button">Upload Recording</button>
+			<br>
+			<p id="record-status-text"></p>
 			<audio id="recorded-audio"></audio>
 		</div>
 
-		<p id="user-health-text"></p>
-		<canvas id="image-canvas">
+		<p id="upload-status-text"></p>
 
+		<canvas id="image-canvas" width="600" height="400" style="border: 1px solid #000000;" oncontextmenu="return false"></canvas>
+
+		<script src="/socket.io/socket.io.js"></script>
 		<script type="text/javascript">
+			var username = "{{{username}}}";
+
+			var socket = io();
+			socket.emit("username", {id: username});
+
+			var hasBaseAudioText = document.getElementById("has-base-audio-text");
+			var hasBaseAudio = false;
+			socket.on("hasBaseAudio", function(data) {
+				hasBaseAudio = data.status;
+				hasBaseAudioText.innerHTML = "Has base audio: " + hasBaseAudio;
+				resetBaseAudioButton.disabled = !hasBaseAudio;
+			});
+
+			var resetBaseAudioButton = document.getElementById("reset-base-audio-button");
+			resetBaseAudioButton.onclick = function () {
+				socket.emit("resetBaseAudio", {id: username});
+			};
+
+
+			var canvas = document.getElementById("image-canvas");
+			var ctx = canvas.getContext("2d")
+			socket.on("diffImage", function(data) {
+				console.log("Received diffImage")
+				console.log(data);
+				var img = new Image();
+				img.src = 'data:image/jpeg;base64,' + data.buffer;
+				ctx.drawImage(img, 0, 0);
+			});
+
+			var uploadStatusText = document.getElementById("upload-status-text")
 			var userHealthText = document.getElementById("user-health-text");
 
 			var fileInput = document.getElementById("file-input");
@@ -41,20 +137,32 @@
 
 			function handleFileUpload(file, uploadType) {
 				const formData = new FormData();
-				formData.append('myFile', file);
+				var keyName = username + "*";
+				if (!hasBaseAudio) {
+					keyName += "base";
+				} else {
+					keyName += "new";
+				}
+				formData.append(keyName, file);
+				uploadStatusText.innerHTML = "Processing...";
 
 				fetch('/classifier/upload_file_worker', {
-						method: 'POST',
-						body: formData,
-					})
-					.then(response => response.json())
-					.then(data => {
-						console.log("success");
-						userHealthText.innerHTML = data.num;
-					})
-					.catch(error => {
-						console.error(error)
-					})
+					method: 'POST',
+					body: formData,
+				})
+				.then(response => response.json())
+				.then(data => {
+					console.log("Success " + data.audioType);
+					if (data.audioType == "base") {
+						uploadStatusText.innerHTML = "Saved the base audio";
+					} else {
+						uploadStatusText.innerHTML = "Results: " + data.num;
+						// add image to canvas
+					}
+				})
+				.catch(error => {
+					console.error(error)
+				})
 			}
 
 			// all recording code
