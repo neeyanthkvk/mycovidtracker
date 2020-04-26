@@ -29,7 +29,6 @@ function postLog() {
         'cough': document.getElementById("cough").checked,
         'breath': document.getElementById("breath").checked,
         'fatigue': document.getElementById("fatigue").checked,
-        'muscle': document.getElementById("muscle").checked,
     }
     console.log(dat)
     var ajax_params = {
