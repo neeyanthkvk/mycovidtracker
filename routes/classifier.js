@@ -7,7 +7,7 @@ module.exports = function (io) {
 	router.get('/', function(req, res, next) {
 		console.log("classifier anon()");
 		console.log("session username: " + req.session.username);
-		req.session.username = "richard";
+		req.session.username = "Richard";
 		res.render('classifier', {
 			'auth':	req.session.username != null,
 			"username": req.session.username,
