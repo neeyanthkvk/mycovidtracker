@@ -28,7 +28,7 @@
 </head>
 
 <body>
-	<div class="navbar navbar-dark navbar-expand-sm fixed-top">
+	<div class="navbar navbar-active navbar-dark navbar-expand-sm fixed-top">
 		<div class="container">
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
 				<span class="navbar-toggler-icon"></span>
@@ -36,8 +36,8 @@
 			<div class="collapse navbar-collapse" id="Navbar">
 				{{#if auth}}
 					<ul class="navbar-nav mr-auto">
-						<li class="nav-item"><a class="nav-link" href="./"><span class="fa fa-home fa-lg"></span> Home</a></li>
-						<li class="nav-item active"><a class="nav-link" href="./about"><span class="fa fa-info fa-lg"></span> About</a></li>
+						<li class="nav-item active"><a class="nav-link" href="./"><span class="fa fa-home fa-lg"></span> Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="./about"><span class="fa fa-info fa-lg"></span> About</a></li>
 						<li class="nav-item"><a class="nav-link" href="./log"><span class="fa fa-address-card fa-lg"></span>My Logs</a></li>
 						<li class="nav-item"><a class="nav-link" href="./classifier"><span class="fa fa-address-card fa-lg"></span>Classifier</a></li>
 					</ul>
@@ -45,14 +45,11 @@
 						<a id="logoutButton" onclick="logout()">
 							<span class="fa fa-sign-in"></span> Log Out
 						</a>
-						<a id="usernameText">
-							<span class="fa "></span> {{username}}
-						</a>
 					</span>
 				{{else}}
 					<ul class="navbar-nav mr-auto">
-						<li class="nav-item"><a class="nav-link" href="./"><span class="fa fa-home fa-lg"></span> Home</a></li>
-						<li class="nav-item active"><a class="nav-link" href="./about"><span class="fa fa-info fa-lg"></span> About</a></li>
+						<li class="nav-item active"><a class="nav-link" href="./"><span class="fa fa-home fa-lg"></span> Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="./about"><span class="fa fa-info fa-lg"></span> About</a></li>
 					</ul>
 					<span class="navbar-text">
 						<a id="login-modal-button">
@@ -137,45 +134,11 @@
 <br><br><br>
 
 <header>
-	<div class="container">
 		<div class="col-12 col-sm-6">
 			<h1>About Us</h1>
 		</div>
 	</div>
-</div>
 </header>
-
-<div class="site-section bg-light">
-		<div class="container">
-			<div class="row mb-5">
-				<div class="col-md-12" data-aos="fade">
-					<h2 class="site-section-heading text-center text-uppercase">The Team</h2>
-				</div>
-			</div>
-			<div class="row justify-content-center">
-				<div class="col-md-6 text-center mb-5" data-aos="fade-up" data-aos-delay="100">
-					<img src="img/sarah.png" alt="Image" class="img-fluid rounded w-50 mb-4">
-					<h2 class="h5 text-uppercase">Sarah Gu</h2>
-					<span class="d-block mb-4">Columbia University Class of 2024</span>
-				</div>
-				<div class="col-md-6 text-center mb-5" data-aos="fade-up" data-aos-delay="200">
-					<img src="img/neeyanth.png" alt="Image" class="img-fluid rounded w-50 mb-4">
-					<h2 class="h5 text-uppercase">Neeyanth Kopparapu</h2>
-					<span class="d-block mb-4">Harvard University Class of 2024</span>
-				</div>
-				<div class="col-md-6 text-center mb-5" data-aos="fade-up" data-aos-delay="300">
-					<img src="img/sanjana.png" alt="Image" class="img-fluid rounded w-50 mb-4">
-					<h2 class="h5 text-uppercase">Sanjana Meduri</h2>
-					<span class="d-block mb-4">Carnegie Mellon University Class of 2024</span>
-				</div>
-				<div class="col-md-6 text-center mb-5" data-aos="fade-up" data-aos-delay="400">
-					<img src="img/richard.jpg" alt="Image" class="img-fluid rounded w-50 mb-4">
-					<h2 class="h5 text-uppercase">Richard Zhan</h2>
-					<span class="d-block mb-4">Carnegie Mellon University Class of 2024</span>
-				</div>
-			</div>
-		</div>
-	</div>
 
 <div class="site-half" style = "background: white">
 		<div class="img-bg-1" style="background-image: url('img/inspiration.png');" data-aos="fade"></div>
@@ -229,6 +192,38 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="site-section bg-light">
+				<div class="container">
+					<div class="row mb-5">
+						<div class="col-md-12" data-aos="fade">
+							<h2 class="site-section-heading text-center text-uppercase">The Team</h2>
+						</div>
+					</div>
+					<div class="row justify-content-center">
+						<div class="col-md-6 text-center mb-5" data-aos="fade-up" data-aos-delay="100">
+							<img src="img/sarah.jpg" alt="Image" class="img-fluid rounded w-50 mb-4">
+							<h2 class="h5 text-uppercase">Sarah Gu</h2>
+							<span class="d-block mb-4">Columbia University Class of 2024</span>
+						</div>
+						<div class="col-md-6 text-center mb-5" data-aos="fade-up" data-aos-delay="200">
+							<img src="img/neeyanth.png" alt="Image" class="img-fluid rounded w-50 mb-4">
+							<h2 class="h5 text-uppercase">Neeyanth Kopparapu</h2>
+							<span class="d-block mb-4">Harvard University Class of 2024</span>
+						</div>
+						<div class="col-md-6 text-center mb-5" data-aos="fade-up" data-aos-delay="300">
+							<img src="img/sanjana.jpg" alt="Image" class="img-fluid rounded w-50 mb-4">
+							<h2 class="h5 text-uppercase">Sanjana Meduri</h2>
+							<span class="d-block mb-4">Carnegie Mellon University Class of 2024</span>
+						</div>
+						<div class="col-md-6 text-center mb-5" data-aos="fade-up" data-aos-delay="400">
+							<img src="img/richard.jpg" alt="Image" class="img-fluid rounded w-50 mb-4">
+							<h2 class="h5 text-uppercase">Richard Zhan</h2>
+							<span class="d-block mb-4">Carnegie Mellon University Class of 2024</span>
+						</div>
+					</div>
+				</div>
+			</div>
 </body>
 <footer>
 			<p>

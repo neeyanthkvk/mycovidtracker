@@ -19,7 +19,10 @@ router.get('/', function(req, res, next) {
         })
     }
     else {
-        res.render('tracking')
+        res.render('tracking', {
+            'auth':	req.session.username != null,
+            "username": req.session.username,
+        });
     }
 });
 
