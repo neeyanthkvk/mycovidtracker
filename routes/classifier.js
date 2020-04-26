@@ -128,7 +128,7 @@ module.exports = function (io) {
 			console.log(results);
 
 			const { exec } = require('child_process');
-			exec('comp.sh ' + basePath + " " + newPath + " " + outputBasePath + " " + outputNewPath + " " + outputDiffPath + " " + outputDiffImagePath, (err, stdout, stderr) => {
+			exec('bash ./src/comp.sh ' + basePath + " " + newPath + " " + outputBasePath + " " + outputNewPath + " " + outputDiffPath + " " + outputDiffImagePath, (err, stdout, stderr) => {
 				if (err) {
 					//some err occurred
 					console.error(err)
