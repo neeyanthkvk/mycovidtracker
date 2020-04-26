@@ -15,10 +15,12 @@
     "express": "~4.16.1",
     "express-fileupload": "^1.1.7-alpha.3",
     "ffmpeg": "0.0.4",
+    "fs": "0.0.1-security",
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "node-fetch": "^2.6.0",
-    "python-shell": "^1.0.8"
+    "python-shell": "^1.0.8",
+    "socket.io": "^2.3.0"
   }
 }
