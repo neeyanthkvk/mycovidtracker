@@ -118,13 +118,16 @@
 			socket.on("hasBaseAudio", function(data) {
 				hasBaseAudio = data.status;
 				if(hasBaseAudio) {
-					hasBaseAudioText.innerHTML = "You've Already Recorded a Baseline Audio Clip"
+					hasBaseAudioText.innerHTML = "Your Baseline Audio Clip Has Been Recorded"
+					resetBaseAudioButton.disabled = false;
+					resetBaseAudioButton.style.display = "block";
 				}
 				else{
 					hasBaseAudioText.innerHTML = "Record Your Baseline Audio Clip";
+					resetBaseAudioButton.disabled = true;
+					resetBaseAudioButton.style.display = "none";
 				}
 
-				resetBaseAudioButton.disabled = !hasBaseAudio;
 			});
 
 			var resetBaseAudioButton = document.getElementById("reset-base-audio-button");
