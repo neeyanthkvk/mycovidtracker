@@ -1,24 +1,24 @@
 //webkitURL is deprecated but nevertheless 
 URL = window.URL || window.webkitURL;
-var gumStream;
+let gumStream;
 //stream from getUserMedia() 
-var rec;
+let rec;
 //Recorder.js object 
-var input;
+let input;
 //MediaStreamAudioSourceNode we'll be recording 
 // shim for AudioContext when it's not avb. 
-var AudioContext = window.AudioContext || window.webkitAudioContext;
-var audioContext = new AudioContext;
+let AudioContext = window.AudioContext || window.webkitAudioContext;
+let audioContext = new AudioContext;
 //new audio context to help us record 
-var recordButton = document.getElementById("recordButton");
-var stopButton = document.getElementById("stopButton");
-var pauseButton = document.getElementById("pauseButton");
+let recordButton = document.getElementById("recordButton");
+let stopButton = document.getElementById("stopButton");
+let pauseButton = document.getElementById("pauseButton");
 //add events to those 3 buttons 
 recordButton.addEventListener("click", startRecording);
 stopButton.addEventListener("click", stopRecording);
 pauseButton.addEventListener("click", pauseRecording);
 
-var constraints = {
+const constraints = {
     audio: true,
     video: false
 } 

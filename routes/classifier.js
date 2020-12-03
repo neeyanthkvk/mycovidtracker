@@ -1,10 +1,10 @@
-module.exports = function (io) {
+module.exports = func = (io) => {
 
-	var express = require('express');
-	var router = express.Router();
+	const express = require('express');
+	const router = express.Router();
 
 	/* GET home page. */
-	router.get('/', function(req, res, next) {
+	router.get('/', (req, res) => {
 		console.log("classifier anon()");
 		console.log("session username: " + req.session.username);
 		res.render('classifier', {
@@ -62,10 +62,10 @@ module.exports = function (io) {
 		console.log("Audio type: " + audioType);
 
 		// initialize socket
-		var socket = router.SOCKET_LIST[user];
+		const socket = router.SOCKET_LIST[user];
 
-		var needsConversion = myFile.name == "blob";
-		var fileName = "_" + Math.round(Math.random() * 10000) + "_" + myFile.name;
+		let needsConversion = myFile.name == "blob";
+		let fileName = "_" + Math.round(Math.random() * 10000) + "_" + myFile.name;
 		if (needsConversion) {
 			fileName += ".wav";
 		}
@@ -101,19 +101,19 @@ module.exports = function (io) {
 
 		// compare new image to base image
 
-		var baseFileName = router.BASE_FILE_NAMES[user];
-		var basePath = __dirname + "/../input/" + baseFileName;
-		var newPath = __dirname + "/../input/" + fileName;
+		const baseFileName = router.BASE_FILE_NAMES[user];
+		const basePath = __dirname + "/../input/" + baseFileName;
+		const newPath = __dirname + "/../input/" + fileName;
 		console.log("Paths")
 		console.log(basePath);
 		console.log(newPath);
-		var options = {
+		let options = {
 			"args": [basePath, newPath],
 		}
-		var outputBasePath = __dirname + "/../output/" + baseFileName + "_base.png";
-		var outputNewPath = __dirname + "/../output/" + fileName + "_new.png";
-		var outputDiffPath = __dirname + "/../output/" + fileName + "_diff.wav";
-		var outputDiffImagePath = __dirname + "/../output/" + fileName + "_diff.png";
+		const outputBasePath = __dirname + "/../output/" + baseFileName + "_base.png";
+		const outputNewPath = __dirname + "/../output/" + fileName + "_new.png";
+		const outputDiffPath = __dirname + "/../output/" + fileName + "_diff.wav";
+		const outputDiffImagePath = __dirname + "/../output/" + fileName + "_diff.png";
 		// console.log(outputBasePath)
 		// console.log(outputNewPath)
 		// console.log(outputDiffPath)

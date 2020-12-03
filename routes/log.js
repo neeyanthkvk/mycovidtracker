@@ -1,8 +1,8 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res) => {
     console.log(req.query)
     if('data' in req.query) {
         const datastore = req.app.locals.datastore;
@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
     }
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', (req, res) => {
     try {
         const datastore = req.app.locals.datastore;
         const key = datastore.key(['Logs']);
@@ -50,7 +50,7 @@ router.post('/', function(req, res, next) {
     }
 });
 
-router.delete("/", function(req, res, next) {
+router.delete("/", (req, res) => {
     try {
         req.session = null;
         res.send("You have Logged Out");
